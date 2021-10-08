@@ -1,0 +1,18 @@
+{
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "GatewayWorker\\": "core/framework/gatewayworker/",
+            "Workerman\\": "core/framework/workerman/"
+        }
+    }
+}
