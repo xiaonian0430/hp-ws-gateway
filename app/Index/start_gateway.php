@@ -21,7 +21,7 @@ $gateway->name = $conf['GATEWAY']['SERVER_NAME'];
 $gateway->count = 4;
 
 // 分布式部署时请设置成内网ip（非127.0.0.1）
-$gateway->lanIp = $conf['LAN_IP'];
+$gateway->lanIp = $conf['GATEWAY']['LAN_IP'];
 
 // 内部通讯起始端口。假如$gateway->count=4，起始端口为2300
 // 则一般会使用2300 2301 2302 2303 4个端口作为内部通讯端口 
@@ -34,7 +34,7 @@ $gateway->pingInterval = 10;
 $gateway->pingData = '{"type":"ping"}';
 
 // 服务注册地址
-$registerAddress=$conf['REGISTER']['LISTEN_ADDRESS'].':'.$conf['REGISTER']['PORT'];
+$registerAddress=$conf['REGISTER']['LAN_IP'].':'.$conf['REGISTER']['LAN_PORT'];
 $gateway->registerAddress = $registerAddress;
 
 // 如果不是在根目录启动，则运行runAll方法
