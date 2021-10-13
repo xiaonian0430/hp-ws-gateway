@@ -1,4 +1,4 @@
-# hp-ws-register
+# hp-ws-gateway
 一款高性能支持分布式部署的实时通信框架。
 
 ## 服务器环境要求：
