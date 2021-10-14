@@ -30,8 +30,10 @@ $gateway->startPort = $conf['GATEWAY']['START_PORT'];
 // 心跳间隔
 $gateway->pingInterval = $conf['GATEWAY']['PING_INTERVAL'];
 
+$gateway->pingNotResponseLimit = 1;
+
 // 心跳数据
-$gateway->pingData = '{"type":"ping"}';
+$gateway->pingData = '';
 
 // 服务注册地址
 $registerAddress=$conf['REGISTER']['LAN_IP'].':'.$conf['REGISTER']['LAN_PORT'];
