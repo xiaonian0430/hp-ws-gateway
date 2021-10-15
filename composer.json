@@ -11,6 +11,7 @@
     },
     "autoload": {
         "psr-4": {
+            "App\\": "app/",
             "GatewayWorker\\": "core/framework/gatewayworker/",
             "Workerman\\": "core/framework/workerman/"
         }

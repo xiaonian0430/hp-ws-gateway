@@ -6,7 +6,7 @@
  * @datetime: 2021-09-14 10:00
  */
 use Workerman\Worker;
-use \GatewayWorker\Gateway;
+use GatewayWorker\Gateway;
 
 ini_set('display_errors', 'on');
 defined('IN_PHAR') or define('IN_PHAR', boolval(\Phar::running(false)));
@@ -51,7 +51,7 @@ $gateway = new Gateway($address);
 $gateway->name = CONFIG['GATEWAY']['SERVER_NAME'];
 
 // 设置进程数，gateway进程数建议与cpu核数相同
-$gateway->count = CONFIG['GATEWAY']['WORKER_NUM'];
+$gateway->count = CONFIG['GATEWAY']['PROCESS_COUNT'];
 
 // 分布式部署时请设置成内网ip（非127.0.0.1）
 $gateway->lanIp = CONFIG['GATEWAY']['LAN_IP'];
