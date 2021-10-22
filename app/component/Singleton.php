@@ -1,24 +1,18 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yf
- * Date: 2018/5/24
- * Time: 下午3:56
+ * @author: Xiao Nian
+ * @contact: xiaonian030@163.com
+ * @datetime: 2019-12-01 14:00
  */
 
 namespace App\Component;
 
-
-trait Singleton
-{
+/**
+ * 单例模式
+ */
+trait Singleton {
     private static $instance;
-
-    /**
-     * @param mixed ...$args
-     * @return static
-     */
-    static function getInstance(...$args)
-    {
+    static function getInstance(...$args) {
         if(!isset(static::$instance)){
             static::$instance = new static(...$args);
         }
