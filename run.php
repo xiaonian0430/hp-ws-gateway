@@ -35,15 +35,16 @@ foreach ($argv as $item){
         $mode=$item_val[1];
     }
 }
-if (!file_exists(SERVER_ROOT . '/config/'.$mode.'.php')) {
-    $conf = require_once SERVER_ROOT . '/config/'.$mode.'.php';
+$config_path=SERVER_ROOT . '/config/'.$mode.'.php';
+if (file_exists($config_path)) {
+    $conf = require_once $config_path;
 }else{
-    exit('/config/'.$mode.".php not set\n");
+    exit($config_path." is not exist\n");
 }
 defined('CONFIG') or define('CONFIG', $conf);
 
 //创建临时目录
-$temp_path='./tmp/log';
+$temp_path='./temp/log';
 if(!is_dir($temp_path)){
     mkdir($temp_path, 0777, true);
 }

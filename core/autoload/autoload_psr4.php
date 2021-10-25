@@ -10,5 +10,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\' => array($baseDir . '/app'),
     'Workerman\\' => array($baseDir . '/core/framework/workerman'),
-    'GatewayWorker\\' => array($baseDir . '/core/framework/gatewayworker'),
+    'GatewayWorker\\' => array($baseDir . '/core/framework/gatewayworker')
 );
