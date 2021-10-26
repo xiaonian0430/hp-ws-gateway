@@ -1,2 +1,2 @@
 #!/bin/bash
-php run.php start -mode=produce
+php run.php start -mode=produce -d

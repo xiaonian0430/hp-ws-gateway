@@ -32,4 +32,6 @@ php run.php start -mode=produce
 
 #以daemon方式启动
 php run.php start -mode=produce -d
+
+php run.php stop -mode=produce
 ```

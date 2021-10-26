@@ -6,7 +6,7 @@ echo $1
 # 启动
 if [ "$1"  = "start" ]
 then
-    php run.php start -mode=dev
+    php run.php start -mode=dev -d
 fi
 
 ## 停止服务
@@ -18,11 +18,11 @@ fi
 ## 热重启
 if [ "$1"  = "reload" ]
 then
-    php run.php reload -mode=dev
+    php run.php reload -mode=dev -d
 fi
 
 ## 强制重启
 if [ "$1"  = "restart" ]
 then
-    php run.php restart -mode=dev
+    php run.php restart -mode=dev -d
 fi
