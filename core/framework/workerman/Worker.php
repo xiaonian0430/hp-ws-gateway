@@ -33,7 +33,7 @@ class Worker
      *
      * @var string
      */
-    const VERSION = '4.0.20';
+    const VERSION = '4.0.21';
 
     /**
      * Status starting.
@@ -1384,7 +1384,7 @@ class Worker
     {
         $files = static::getStartFilesForWindows();
         global $argv;
-        if(\in_array('-q', $argv) || \count($files) === 1)
+        if(\in_array('-q', $argv))
         {
             if(\count(static::$_workers) > 1)
             {
@@ -1450,7 +1450,6 @@ class Worker
             1 => array('file', $std_file, 'w'), // stdout
             2 => array('file', $std_file, 'w') // stderr
         );
-
 
         $pipes       = array();
         $process     = \proc_open("php \"$start_file\" -q", $descriptorspec, $pipes);
@@ -1926,7 +1925,7 @@ class Worker
             }
 
             \file_put_contents(static::$_statisticsFile, \serialize($all_worker_info)."\n", \FILE_APPEND);
-            $loadavg = \function_exists('sys_getloadavg') ? \array_map('round', \sys_getloadavg(), array(2)) : array('-', '-', '-');
+            $loadavg = \function_exists('sys_getloadavg') ? \array_map('round', \sys_getloadavg(), array(2,2,2)) : array('-', '-', '-');
             \file_put_contents(static::$_statisticsFile,
                 "----------------------------------------------GLOBAL STATUS----------------------------------------------------\n", \FILE_APPEND);
             \file_put_contents(static::$_statisticsFile,
