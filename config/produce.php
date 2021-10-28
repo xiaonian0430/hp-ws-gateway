@@ -13,10 +13,9 @@ return [
         'SERVER_NAME'    => 'ChatGateway',
         'LISTEN_ADDRESS' => '0.0.0.0',
         'PORT'           => 7272,
-        'PROTOCOL'       => 'Websocket',
         'PROCESS_COUNT'     => 4,  //进程数
-        'START_PORT'     => 2300, //内部通讯起始端口
         'PING_INTERVAL'  => 10,  //心跳间隔
         'LAN_IP'         => '172.16.1.174', //分布式部署时请设置成内网ip（非127.0.0.1）
+        'LAN_START_PORT'     => 2300, //内部通讯起始端口
     ]
 ];

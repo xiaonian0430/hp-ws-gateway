@@ -54,7 +54,7 @@ Worker::$stdoutFile = $temp_path.'/error.log';
 Worker::$logFile = $temp_path.'/log.log';
 
 // gateway 进程
-$address=CONFIG['GATEWAY']['PROTOCOL'].'://'.CONFIG['GATEWAY']['LISTEN_ADDRESS'].':'.CONFIG['GATEWAY']['PORT'];
+$address='Websocket://'.CONFIG['GATEWAY']['LISTEN_ADDRESS'].':'.CONFIG['GATEWAY']['PORT'];
 $gateway = new Gateway($address);
 
 // 设置名称，方便status时查看
@@ -68,7 +68,7 @@ $gateway->lanIp = CONFIG['GATEWAY']['LAN_IP'];
 
 // 内部通讯起始端口。假如$gateway->count=4，起始端口为2300
 // 则一般会使用2300 2301 2302 2303 4个端口作为内部通讯端口
-$gateway->startPort = CONFIG['GATEWAY']['START_PORT'];
+$gateway->startPort = CONFIG['GATEWAY']['LAN_START_PORT'];
 
 // 心跳间隔
 $gateway->pingInterval = CONFIG['GATEWAY']['PING_INTERVAL'];
