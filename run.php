@@ -58,7 +58,7 @@ defined('CONFIG') or define('CONFIG', $conf);
 //初始化worker
 Worker::$stdoutFile = $log_path.'/error.log';
 Worker::$logFile = $log_path.'/log.log';
-Worker::$pidFile = $temp_path.'/http.pid';
+Worker::$pidFile = $temp_path.'/pid.pid';
 
 // gateway 进程
 $address='Websocket://'.CONFIG['GATEWAY']['LISTEN_ADDRESS'].':'.CONFIG['GATEWAY']['PORT'];
