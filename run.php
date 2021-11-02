@@ -5,31 +5,13 @@
  * @contact: xiaonian030@163.com
  * @datetime: 2021-09-14 10:00
  */
-use Workerman\Worker;
-use GatewayWorker\Gateway;
+
+use HP\Gateway\App;
 
 //初始化
 ini_set('display_errors', 'on');
 defined('IN_PHAR') or define('IN_PHAR', boolval(\Phar::running(false)));
 defined('SERVER_ROOT') or define('SERVER_ROOT', IN_PHAR ? \Phar::running() : realpath(getcwd()));
-
-//创建临时目录
-$temp_path=SERVER_ROOT.'/temp';
-$log_path=SERVER_ROOT.'/temp/log';
-if(!is_dir($log_path)){
-    mkdir($log_path, 0777, true);
-}
-
-// 检查扩展或环境
-if(strpos(strtolower(PHP_OS), 'win') === 0) {
-    exit("start.php not support windows.\n");
-}
-if(!extension_loaded('pcntl')) {
-    exit("Please install pcntl extension.\n");
-}
-if(!extension_loaded('posix')) {
-    exit("Please install posix extension.\n");
-}
 
 //自动加载文件
 $auto_file=SERVER_ROOT . '/vendor/autoload.php';
@@ -39,55 +21,8 @@ if (file_exists($auto_file)) {
     exit("Please composer install.\n");
 }
 
-//导入配置文件
-$mode='produce';
-foreach ($argv as $item){
-    $item_val=explode('=', $item);
-    if(count($item_val)==2 && $item_val[0]=='-mode'){
-        $mode=$item_val[1];
-    }
-}
-$config_path=SERVER_ROOT . '/config/'.$mode.'.php';
-if (file_exists($config_path)) {
-    $conf = require_once $config_path;
-}else{
-    exit($config_path." is not exist\n");
-}
-defined('CONFIG') or define('CONFIG', $conf);
+//初始化应用
+$app = new App();
 
-//初始化worker
-Worker::$stdoutFile = $log_path.'/error.log';
-Worker::$logFile = $log_path.'/log.log';
-Worker::$pidFile = $temp_path.'/pid.pid';
-
-// gateway 进程
-$address='Websocket://'.CONFIG['GATEWAY']['LISTEN_ADDRESS'].':'.CONFIG['GATEWAY']['PORT'];
-$gateway = new Gateway($address);
-
-// 设置名称，方便status时查看
-$gateway->name = CONFIG['GATEWAY']['SERVER_NAME'];
-
-// 设置进程数，gateway进程数建议与cpu核数相同
-$gateway->count = CONFIG['GATEWAY']['PROCESS_COUNT'];
-
-// 分布式部署时请设置成内网ip（非127.0.0.1）
-$gateway->lanIp = CONFIG['GATEWAY']['LAN_IP'];
-
-// 内部通讯起始端口。假如$gateway->count=4，起始端口为2300
-// 则一般会使用2300 2301 2302 2303 4个端口作为内部通讯端口
-$gateway->startPort = CONFIG['GATEWAY']['LAN_START_PORT'];
-
-// 心跳间隔
-$gateway->pingInterval = CONFIG['GATEWAY']['PING_INTERVAL'];
-
-$gateway->pingNotResponseLimit = 1;
-
-// 心跳数据
-$gateway->pingData = '';
-
-// 服务注册地址
-$registerAddress=CONFIG['REGISTER']['LAN_IP'].':'.CONFIG['REGISTER']['LAN_PORT'];
-$gateway->registerAddress = $registerAddress;
-
-// 运行所有服务
-Worker::runAll();
+//启动
+$app->run();
